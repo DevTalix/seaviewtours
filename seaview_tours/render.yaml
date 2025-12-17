@@ -1,26 +1,16 @@
-# Create render.yaml in project root
 services:
   - type: web
     name: seaview-tours
+    rootDir: seaview_tours  # Or 'backend' if different
     env: python
-    buildCommand: "./build.sh"
-    startCommand: "gunicorn seaview_tours.wsgi:application"
+    buildCommand: |
+      pip install -r requirements.txt
+      python manage.py collectstatic --noinput
+    startCommand: gunicorn seaview_tours.wsgi:application
     envVars:
-      - key: DATABASE_URL
-        fromDatabase:
-          name: seaview-db
-          property: connectionString
+      - key: DEBUG
+        value: false
+      - key: ALLOWED_HOSTS
+        value: .onrender.com,seaviewtours.com,www.seaviewtours.com
       - key: SECRET_KEY
         generateValue: true
-      - key: WEB_CONCURRENCY
-        value: 4
-    healthCheckPath: /
-    domains:
-      - seaviewtours.com
-      - www.seaviewtours.com
-
-databases:
-  - name: seaview-db
-    plan: free
-    databaseName: seaviewtours
-    user: seaviewuser

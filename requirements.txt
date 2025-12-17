@@ -1,0 +1,2 @@
+﻿# This file redirects to the real requirements
+# Real requirements are in seaview_tours/requirements.txt
