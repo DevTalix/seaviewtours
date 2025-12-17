@@ -1,0 +1,403 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Essential travel tips, advice, and guides for visiting Uganda. Learn about visa requirements, health precautions, packing lists, and cultural etiquette.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- Header - Consistent with Index -->
+    <header class="header">
+          <div class="nav-overlay" id="navOverlay"></div>
+        <div class="container">
+            <div class="logo">
+                <a href="/">
+                    <img src="images/logo.png" alt="SeaView Tours & Travel" height="70">
+                </a>
+                   <!-- Add this hamburger button -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+            </div>
+            <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+              <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="tips-hero">
+        <div class="container">
+            <h1>Essential Travel Tips</h1>
+            <p>Expert advice to make your adventure safe, enjoyable, and unforgettable</p>
+        </div>
+    </section>
+
+    <!-- Travel Planning Tips -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Travel Planning Tips</h2>
+                <p>Prepare for your adventure with these essential planning tips</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-passport"></i></div>
+                        <h3>Visa & Documentation</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Check visa requirements based on your nationality</li>
+                            <li>Apply for Uganda visa at least 2-4 weeks before travel</li>
+                            <li>Ensure passport has 6+ months validity</li>
+                            <li>Make copies of important documents</li>
+                            <li>Carry passport photos for on-arrival visas</li>
+                            <li>Register with your embassy if staying long-term</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-suitcase"></i></div>
+                        <h3>Packing Essentials</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Lightweight, breathable clothing</li>
+                            <li>Comfortable walking/hiking shoes</li>
+                            <li>Rain jacket (especially for rainy seasons)</li>
+                            <li>Sun protection (hat, sunglasses, sunscreen)</li>
+                            <li>Binoculars for wildlife viewing</li>
+                            <li>Power adapter (UK Type G)</li>
+                            <li>Reusable water bottle</li>
+                            <li>Camera with extra batteries</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-plane"></i></div>
+                        <h3>Health & Safety</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Yellow fever vaccination certificate required</li>
+                            <li>Consult doctor about malaria prevention</li>
+                            <li>Pack basic first aid kit</li>
+                            <li>Drink only bottled or purified water</li>
+                            <li>Use insect repellent in evenings</li>
+                            <li>Carry hand sanitizer</li>
+                            <li>Get comprehensive travel insurance</li>
+                            <li>Keep emergency contact numbers handy</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Safari & Wildlife Tips -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Safari & Wildlife Tips</h2>
+                <p>Make the most of your wildlife experiences in Uganda</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-camera"></i></div>
+                        <h3>Photography Tips</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Golden hours (sunrise/sunset) for best light</li>
+                            <li>Use zoom lens for wildlife photography</li>
+                            <li>Pack extra memory cards and batteries</li>
+                            <li>Respect animals - don't use flash</li>
+                            <li>Capture local culture respectfully</li>
+                            <li>Backup photos daily</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-hiking"></i></div>
+                        <h3>Gorilla Trekking</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Book permits 6+ months in advance</li>
+                            <li>Good physical fitness required</li>
+                            <li>Wear comfortable waterproof boots</li>
+                            <li>Carry sufficient water and snacks</li>
+                            <li>Follow guide's instructions strictly</li>
+                            <li>Maintain 7m distance from gorillas</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-tree"></i></div>
+                        <h3>National Park Rules</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Stay in vehicle during game drives</li>
+                            <li>Don't feed or approach wildlife</li>
+                            <li>Keep noise levels low</li>
+                            <li>Stay on marked trails during hikes</li>
+                            <li>No littering - pack out what you pack in</li>
+                            <li>Respect park opening/closing times</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Cultural Etiquette -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Cultural Etiquette</h2>
+                <p>Respect local customs and traditions during your visit</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-hands-helping"></i></div>
+                    <h4>Greetings</h4>
+                    <p>Handshakes are common<br>Use right hand for giving/receiving<br>Greet elders first as sign of respect</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-tshirt"></i></div>
+                    <h4>Dress Code</h4>
+                    <p>Modest clothing appreciated<br>Cover shoulders and knees in rural areas<br>Respect religious site dress codes</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-camera-retro"></i></div>
+                    <h4>Photography</h4>
+                    <p>Always ask permission before photographing people<br>Some communities may request small payment<br>Respect "no photography" signs</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-handshake"></i></div>
+                    <h4>General Etiquette</h4>
+                    <p>Remove shoes when entering homes<br>Use titles when addressing professionals<br>Punctuality is flexible ("Uganda time")<br>Accept hospitality graciously</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Budget & Money Tips -->
+    <section class="section-padding bg-white">
+        <div class="container">
+            <div class="section-header">
+                <h2>Budget & Money Tips</h2>
+                <p>Smart financial planning for your Uganda trip</p>
+            </div>
+            
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-wallet"></i></div>
+                        <h3>Money Management</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Carry mix of cash and cards</li>
+                            <li>Inform bank of travel plans</li>
+                            <li>Use ATMs in secure locations</li>
+                            <li>Keep small bills for tips and markets</li>
+                            <li>Use money belt or hidden pouch</li>
+                            <li>Track daily expenses</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-shopping-cart"></i></div>
+                        <h3>Shopping Tips</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Bargain politely in markets</li>
+                            <li>Support local artisans</li>
+                            <li>Check wood/ivory item regulations</li>
+                            <li>Keep receipts for customs</li>
+                            <li>Quality varies - inspect carefully</li>
+                            <li>Consider shipping large items home</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="tip-card">
+                    <div class="tip-header">
+                        <div class="tip-icon"><i class="fas fa-umbrella-beach"></i></div>
+                        <h3>Seasonal Savings</h3>
+                    </div>
+                    <div class="tip-content">
+                        <ul class="tip-list">
+                            <li>Low season (Apr-May, Oct-Nov) for discounts</li>
+                            <li>Book flights 2-3 months in advance</li>
+                            <li>Consider group tours for savings</li>
+                            <li>Look for package deals</li>
+                            <li>Travel mid-week for cheaper flights</li>
+                            <li>Ask about last-minute deals</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Emergency Information -->
+    <section class="section-padding bg-light">
+        <div class="container">
+            <div class="section-header">
+                <h2>Emergency Information</h2>
+                <p>Important contacts and safety information</p>
+            </div>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-phone-alt"></i></div>
+                    <h4>Emergency Numbers</h4>
+                    <p>Police: 999 / 112<br>Ambulance: 911<br>Fire: 999<br>Tourist Police: 0414 342 196</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-hospital"></i></div>
+                    <h4>Medical Facilities</h4>
+                    <p>Case Medical Centre, Kampala<br>Nakasero Hospital, Kampala<br>International Hospital Kampala<br>Private clinics in major towns</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-passport"></i></div>
+                    <h4>Embassy Contacts</h4>
+                    <p>US Embassy: +256 414 306 001<br>UK Embassy: +256 312 312 000<br>Canadian High Commission<br>Australian High Commission</p>
+                </div>
+                
+                <div class="info-card">
+                    <div class="info-icon"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Travel Insurance</h4>
+                    <p>Essential for all travelers<br>Cover medical evacuation<br>Include trip cancellation<br>Keep policy details accessible</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Call to Action -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Need Personalized Travel Advice?</h2>
+                <p>Our travel experts are here to answer all your questions and help plan your perfect Uganda adventure.</p>
+                
+                <div class="cta-buttons">
+                    <a href="{% url 'contact' %}" class="btn btn-primary" style="padding: 15px 30px; font-size: 1.1rem;">
+                        <i class="fas fa-question-circle"></i> Ask a Question
+                    </a>
+                    <a href="https://wa.me/256701157839" target="_blank" class="btn-whatsapp-cta">
+                        <i class="fab fa-whatsapp"></i> Chat with Expert
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer - Consistent with Index -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <a href="../">
+                        <img src="images/logo.png" alt="SeaView Tours" height="30" style="filter: brightness(0) invert(1);">
+                    </a>
+                    <p style="margin-top: 1rem; opacity: 0.9;">Making travel easy, safe, and memorable for all tourists.</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                 <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Travel Resources</h4>
+                    <ul>
+                        <li><a href="travel-tips.html#visa">Visa Information</a></li>
+                        <li><a href="travel-tips.html#health">Health Tips</a></li>
+                        <li><a href="travel-tips.html#packing">Packing Guide</a></li>
+                        <li><a href="travel-tips.html#culture">Cultural Etiquette</a></li>
+                        <li><a href="travel-tips.html#safety">Safety Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Zainabu, Aziza Building, Entebbe Road, Level 7:RmC1-6</p>
+                    <p><i class="fas fa-phone"></i> +256 701 157 839 / 0777726356</p>
+                    <p><i class="fas fa-envelope"></i> seaviewreservations2@gmail.com</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+            </div>
+        </div>
+    </footer>
+     <script src="js/script.js"></script>
+
+    <!-- WhatsApp Float - Consistent with Index -->
+    <a href="https://wa.me/256701157839" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+</body>
+</html>

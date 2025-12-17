@@ -1,0 +1,693 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Complete travel services in Uganda: passport processing, visa assistance, air ticketing, car hire, tour packages. Fast & reliable service.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ========== SERVICES PAGE STYLES ========== */
+        
+        /* Hero Banner */
+        .services-hero {
+            background: linear-gradient(rgba(46, 58, 89, 0.85), rgba(46, 58, 89, 0.85)),
+                        url('https://visaliv.com/business-directories/uploads/listing_thumbnails/IN-TA/part9/travel-agency1.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 0 100px;
+            text-align: center;
+            margin-top: 0;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .services-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .services-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Services Grid */
+        .services-main {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            color: var(--secondary-blue);
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        .section-title p {
+            color: #666;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Service Cards */
+        .service-detail-card {
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            margin-bottom: 40px;
+            transition: transform 0.3s;
+        }
+
+        .service-detail-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .service-card-header {
+            padding: 2rem;
+            background: var(--secondary-blue);
+            color: white;
+            position: relative;
+        }
+
+        .service-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary-orange);
+        }
+
+        .service-card-header h3 {
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+            color: white;
+        }
+
+        .service-card-header p {
+            opacity: 0.9;
+            font-size: 1.1rem;
+        }
+
+        .service-card-content {
+            padding: 2rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .service-card-content {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Service Details */
+        .service-details {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 8px;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.8rem 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            font-weight: 600;
+            color: var(--secondary-blue);
+            flex: 1;
+        }
+
+        .detail-value {
+            color: #555;
+            flex: 2;
+            text-align: right;
+        }
+
+        .requirements-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .requirements-list li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+        }
+
+        .requirements-list li i {
+            color: var(--primary-orange);
+            margin-top: 3px;
+        }
+
+        /* Action Buttons */
+        .service-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .action-buttons {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .btn-service {
+            padding: 12px 20px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-align: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            transition: all 0.3s;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .btn-service-primary {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-service-primary:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .btn-service-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-service-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-service-call {
+            background: var(--primary-blue);
+            color: white;
+        }
+
+        .btn-service-call:hover {
+            background: #29b6f6;
+            transform: translateY(-2px);
+        }
+
+        /* Quick Form */
+        .quick-form {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border: 2px solid #e2e8f0;
+            margin-top: 1rem;
+        }
+
+        .quick-form h4 {
+            color: var(--secondary-blue);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            font-family: 'Open Sans', sans-serif;
+        }
+
+        .form-btn {
+            width: 100%;
+            padding: 10px;
+            background: var(--secondary-blue);
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .form-btn:hover {
+            background: #1e2a47;
+        }
+
+        /* Add-Ons Section */
+        .addons-section {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .addons-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .addon-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            transition: all 0.3s;
+        }
+
+        .addon-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--primary-orange);
+        }
+
+        .addon-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Call to Action */
+        .services-cta {
+            background: var(--secondary-blue);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .services-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .services-cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn-cta {
+            padding: 14px 28px;
+            border-radius: 8px;
+            font-weight: 600;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s;
+        }
+
+        .btn-cta-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-cta-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-cta-call {
+            background: var(--primary-orange);
+            color: white;
+        }
+
+        .btn-cta-call:hover {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        /* ========== RESPONSIVE DESIGN ========== */
+        @media (max-width: 992px) {
+            .services-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .services-hero {
+                padding: 140px 0 80px;
+                min-height: 50vh;
+            }
+            
+            .services-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .services-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .service-card-header {
+                padding: 1.5rem;
+            }
+            
+            .service-card-header h3 {
+                font-size: 1.5rem;
+            }
+            
+            .service-card-content {
+                padding: 1.5rem;
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .btn-cta {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .services-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .service-card-header {
+                padding: 1.2rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn-service {
+                width: 100%;
+            }
+            
+            .addons-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #128C7E;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-overlay" id="navOverlay"></div>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="SeaView Tours & Travel" height="50">
+            </div>
+               <!-- Add this hamburger button -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+            <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+               <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="services-hero">
+        <div class="container">
+            <h1>Our Professional Services</h1>
+            <p>Complete travel solutions from visa processing to unforgettable adventures across Uganda and beyond</p>
+            <div class="hero-buttons">
+                <a href="#services" class="btn btn-primary">Explore Services</a>
+                <a href="https://wa.me/256701157839" target="_blank" class="btn" style="background: #25D366; color: white;">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Chat
+                </a>
+            </div>
+        </div>
+    </section>
+
+  <section class="services-overview">
+    <div class="container">
+        <h2 class="text-center">Our Professional Services</h2>
+        <p class="text-center" style="max-width: 600px; margin: 1rem auto 3rem; color: #666;">
+            Complete travel solutions from visa processing to unforgettable adventures
+        </p>
+        
+        <div class="services-grid">
+            <!-- Service 1: Passport Processing -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://geneva.mofa.go.ug/sites/default/files/inline-images/download%20%282%29.jpeg" alt="Passport Processing">
+                </div>
+                <div class="service-content">
+                    <h3>Passport and Visa Processing</h3>
+                    <p>Fast and reliable passport application and renewal services</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=passport" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 2: Air Ticketing -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFsSdMe_52iiS__JUTy5TpRhrXgWt8yMAubkdAS2jZp_X88QxgLk0lWU2j689kbgnHH7g&usqp=CAU" alt="Air Ticketing">
+                </div>
+                <div class="service-content">
+                    <h3>Air Ticketing</h3>
+                    <p>Best deals on domestic and international flight bookings</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=air-ticketing" class="btn btn-primary btn-service">Book Flight</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 3: Car Hire -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://nileexcursionsafaris.com/wp-content/uploads/2024/10/congo-car-Rental.jpg" alt="Car Hire">
+                </div>
+                <div class="service-content">
+                    <h3>Car Hire</h3>
+                    <p>Reliable vehicle rental for business and leisure travel</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=car-hire" class="btn btn-primary btn-service">Rent Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 4: Honeymoon Packages -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://th-thumbnailer.cdn-si-edu.com/JrHyXBFia908Fp4DBaUWKv7GuQU=/960x439/https://tf-cmsv2-journeys-media.s3.amazonaws.com/filer/41/2e/412e7c5b-5491-463d-afd3-e76c68365334/animal_leopards_safari_is000014763964.jpg" alt="Honeymoon Packages">
+                </div>
+                <div class="service-content">
+                    <h3>Tours and Travel</h3>
+                    <p>Curated safari adventures and cultural experiences and romantic getaways</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=honeymoon" class="btn btn-primary btn-service">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 5: Interpol Services -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://menarights.org/sites/default/files/2025-04/shutterstock_2420124235.jpg" alt="Interpol Services">
+                </div>
+                <div class="service-content">
+                    <h3>Interpol Services</h3>
+                    <p>Professional assistance with international police clearance</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=interpol" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 6: National IDs -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFOmB926bPYlT8XTuxuIBRwktIF8P4kVGM6M3R2QY169RI8Dhrzb6CXfn8_-Iu69Cd6dY&usqp=CAU" alt="National IDs">
+                </div>
+                <div class="service-content">
+                    <h3>National IDs Processings</h3>
+                    <p>Application, renewal and replacement of national ID</p>
+                    <div class="service-actions">
+                        <a href="{% url 'booking' %}?service=national-id" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+   
+
+
+    <!-- Call to Action -->
+    <section class="services-cta">
+        <div class="container">
+            <h2>Need Help? Talk to an Agent Now</h2>
+            <p>Our travel experts are available 24/7 to assist you with any service you need. Get instant help and personalized advice.</p>
+            <div class="cta-buttons">
+                <a href="https://wa.me/256701157839" target="_blank" class="btn-cta btn-cta-whatsapp">
+                    <i class="fab fa-whatsapp"></i> WhatsApp Agent
+                </a>
+                <a href="tel:+256701157839" class="btn-cta btn-cta-call">
+                    <i class="fas fa-phone"></i> Call: +256 701 157 839
+                </a>
+            </div>
+            <p style="margin-top: 1.5rem; font-size: 0.9rem; opacity: 0.8;">
+                <i class="fas fa-clock"></i> 24/7 Support | <i class="fas fa-bolt"></i> Instant Response
+            </p>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/256701157839" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="images/Logo.png" alt="SeaView Tours" height="50" style="filter: brightness(0) invert(1);">
+                    <p style="margin-top: 1rem; opacity: 0.9;">Making travel across Uganda easy, safe, and memorable for all tourists.</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                   <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="{% url 'services' %}#passport">Passport Processing</a></li>
+                        <li><a href="{% url 'services' %}#visa">Visa Processing</a></li>
+                        <li><a href="{% url 'services' %}#air-ticketing">Air Ticketing</a></li>
+                        <li><a href="{% url 'services' %}#car-hire">Car Hire</a></li>
+                        <li><a href="{% url 'services' %}#tours">Tours & Travel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Zainabu, Aziza Building, Entebbe Road, Level 7:RmC1-6</p>
+                    <p><i class="fas fa-phone"></i> +256 701 157 839 / 0777726356</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+                     <p><i class="fas fa-envelope"></i> 
+                   <a href="mailto:seaviewreservations2@gmail.com">seaviewreservations2@gmail.com</a>
+                </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+            </div>
+        </div>
+    </footer>
+  <script src="js/script.js"></script>
+</body>
+</html>

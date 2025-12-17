@@ -1,0 +1,556 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Contact SeaView Tours for travel assistance, visa processing, tour bookings, and all travel services in Uganda.">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    
+    <!-- CONTACT PAGE SPECIFIC STYLES -->
+    <style>
+        /* ========== CONTACT PAGE STYLES ========== */
+        
+        /* Hero Banner */
+        .contact-hero {
+            background: linear-gradient(rgba(46, 58, 89, 0.85), rgba(46, 58, 89, 0.85)),
+                        url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 0 100px;
+            text-align: center;
+            margin-top: 0;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .contact-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .contact-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+        }
+
+        @media (min-width: 992px) {
+            .contact-container {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Contact Info */
+        .contact-info {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-info h2 {
+            color: #2E3A59;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .contact-info h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #FF6B35;
+            border-radius: 2px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .contact-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background: #FF6B35;
+            color: white;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .contact-details h4 {
+            color: #2E3A59;
+            margin-bottom: 0.3rem;
+            font-size: 1.1rem;
+        }
+
+        .contact-details p {
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .contact-details a {
+            color: #4FC3F7;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .contact-details a:hover {
+            color: #FF6B35;
+        }
+
+        /* Contact Form */
+        .contact-form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .contact-form-container h2 {
+            color: #2E3A59;
+            margin-bottom: 1.5rem;
+            font-size: 2rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .contact-form-container h2::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: #FF6B35;
+            border-radius: 2px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #2E3A59;
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #FF6B35;
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .submit-btn {
+            background: #FF6B35;
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-status {
+            margin-top: 1rem;
+            padding: 10px;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            display: block;
+        }
+
+        .form-status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            display: block;
+        }
+
+        /* Map Section */
+        .map-section {
+            padding: 0 0 80px;
+            background: #f8fafc;
+        }
+
+        .map-frame {
+            width: 100%;
+            height: 400px;
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .contact-hero {
+                padding: 140px 0 80px;
+                min-height: 50vh;
+            }
+            
+            .contact-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .contact-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .contact-info, .contact-form-container {
+                padding: 2rem;
+            }
+            
+            .map-frame {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="SeaView Tours & Travel" height="50">
+        </div>
+        
+        <nav class="nav">
+            <ul>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'about' %}">About Us</a></li>
+                <li><a href="{% url 'services' %}">Our Services</a></li>
+                <li><a href="{% url 'contact' %}" class="active">Contact Us</a></li>
+                <li><a href="{% url 'booking' %}">Booking</a></li>
+                <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+            </ul>
+        </nav>
+        
+        <div class="header-cta">
+            <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+        </div>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>We're here to assist you anytime. Get in touch for professional travel assistance and support.</p>
+        <div class="hero-buttons">
+            <a href="tel:+256701157839" class="btn btn-primary">
+                <i class="fas fa-phone"></i> Call Now
+            </a>
+            <a href="https://wa.me/256701157839" target="_blank" class="btn" style="background: #25D366; color: white;">
+                <i class="fab fa-whatsapp"></i> WhatsApp Chat
+            </a>
+        </div>
+    </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section class="contact-section">
+    <div class="container">
+        <div class="contact-container">
+            
+            <!-- ===== CONTACT INFO ===== -->
+            <div class="contact-info">
+                <h2>Get in Touch</h2>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-phone"></i></div>
+                    <div class="contact-details">
+                        <h4>Phone Numbers</h4>
+                        <p><a href="tel:+256701157839">+256 701 157 839</a><br>
+                           <a href="tel:+256777726356">+256 777 726 356</a></p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fab fa-whatsapp"></i></div>
+                    <div class="contact-details">
+                        <h4>WhatsApp</h4>
+                        <p><a href="https://wa.me/256701157839" target="_blank">Chat with us instantly</a><br>
+                           Available 24/7 for quick responses</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+                    <div class="contact-details">
+                        <h4>Email Address</h4>
+                        <p><a href="mailto:seaviewreservations2@gmail.com">seaviewreservations2@gmail.com</a><br>
+                           We respond within 24 hours</p>
+                    </div>
+                </div>
+                
+                <div class="contact-item">
+                    <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+                    <div class="contact-details">
+                        <h4>Office Address</h4>
+                        <p>Zainabu, Aziza Building, Entebbe Road<br>
+                           Level 7, Room C1-6, Kampala, Uganda</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ===== CONTACT FORM (DJANGO) ===== -->
+            <div class="contact-form-container">
+                <h2>Send Us a Message</h2>
+                
+                <form id="contactForm" method="POST" action="{% url 'contact' %}" class="contact-form">
+                    {% csrf_token %}
+                    
+                    <div class="form-group">
+                        <label class="form-label">Full Name *</label>
+                        <input type="text" name="name" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Email Address *</label>
+                        <input type="email" name="email" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Phone Number *</label>
+                        <input type="tel" name="phone" class="form-input" required>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Service Needed</label>
+                        <select name="service" class="form-select">
+                            <option value="">Select a service</option>
+                            <option value="passport">Passport Processing</option>
+                            <option value="visa">Visa Processing</option>
+                            <option value="air-ticketing">Air Ticketing</option>
+                            <option value="car-hire">Car Hire</option>
+                            <option value="tours">Tours & Travel</option>
+                            <option value="honeymoon">Honeymoon Packages</option>
+                            <option value="interpol">Interpol Services</option>
+                            <option value="national-id">National IDs</option>
+                            <option value="other">Other Inquiry</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Message *</label>
+                        <textarea name="message" class="form-textarea" required></textarea>
+                    </div>
+                    
+                    <div id="formStatus" class="form-status"></div>
+                    
+                    <button type="submit" id="submitBtn" class="submit-btn">
+                        <i class="fas fa-paper-plane"></i> Send Message
+                    </button>
+                </form>
+            </div>
+            
+        </div>
+    </div>
+</section>
+
+<!-- ================= MAP ================= -->
+<section class="map-section">
+    <div class="container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7534043148165!2d32.58722507497323!3d0.315140364067299!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x177dbb93b1b6e7ab%3A0x4dbb95b0b3e3c0b8!2sEntebbe%20Road%2C%20Kampala%2C%20Uganda!5e0!3m2!1sen!2s!4v1700000000000!5m2!1sen!2s" 
+                class="map-frame" 
+                allowfullscreen="" 
+                loading="lazy" 
+                referrerpolicy="no-referrer-when-downgrade"
+                title="SeaView Tours Office Location">
+        </iframe>
+    </div>
+</section>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+    <div class="container">
+        <div class="footer-content">
+            <div class="footer-section">
+                <img src="{% static 'images/Logo.png' %}" alt="SeaView Tours" height="50" style="filter: brightness(0) invert(1);">
+                <p style="margin-top: 1rem; opacity: 0.9;">Making travel across Uganda easy, safe, and memorable for all tourists.</p>
+                <div class="social-links" style="margin-top: 1.5rem;">
+                    <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                    <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                    <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                    <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'about' %}">About Us</a></li>
+                    <li><a href="{% url 'services' %}">Our Services</a></li>
+                    <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                    <li><a href="{% url 'booking' %}">Booking</a></li>
+                </ul>
+            </div>
+            
+           <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="{% url 'services' %}#visa">Visa Processing</a></li>
+                        <li><a href="{% url 'services' %}#passport">Passport Processing</a></li>
+                        <li><a href="{% url 'services' %}#air-ticketing">Air Ticketing</a></li>
+                        <li><a href="{% url 'services' %}#car-hire">Car Hire</a></li>
+                        <li><a href="{% url 'services' %}#honeymoon">Tours and Travel</a></li>
+                         <li><a href="{% url 'services' %}#honeymoon">Interpol Services</a></li>
+                         <li><a href="{% url 'services' %}#honeymoon">National ID Services</a></li>
+                    </ul>
+                </div>
+            
+            <div class="footer-section">
+                <h4>Contact Info</h4>
+                <p><i class="fas fa-map-marker-alt"></i> Zainabu, Aziza Building, Entebbe Road, Level 7:RmC1-6</p>
+                <p><i class="fas fa-phone"></i> +256 701 157 839 / 0777726356</p>
+                <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+                <p><i class="fas fa-envelope"></i> seaviewreservations2@gmail.com</p>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+        </div>
+    </div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const form = document.getElementById('contactForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const formStatus = document.getElementById('formStatus');
+    
+    form.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
+        
+        try {
+            const formData = new FormData(this);
+            
+            const response = await fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            });
+            
+            const data = await response.json();
+            
+            if (data.success) {
+                showStatus('Thank you! Your message has been sent successfully.', 'success');
+                form.reset();
+            } else {
+                showStatus(data.message || 'Error sending message.', 'error');
+            }
+        } catch (error) {
+            showStatus('Network error. Please try again.', 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Send Message';
+        }
+    });
+    
+    function showStatus(message, type) {
+        formStatus.textContent = message;
+        formStatus.className = `form-status ${type}`;
+        formStatus.style.display = 'block';
+        
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            formStatus.style.display = 'none';
+        }, 5000);
+    }
+});
+</script>
+
+</body>
+</html>

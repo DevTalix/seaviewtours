@@ -1,0 +1,228 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Contact SeaView Tours for travel assistance, visa processing, tour bookings, and all travel services in Uganda.">
+
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+
+    <!-- Main CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+</head>
+
+<body>
+
+<!-- ================= HEADER ================= -->
+<header class="header">
+    <div class="nav-overlay" id="navOverlay"></div>
+    <div class="container">
+        <div class="logo">
+            <img src="{% static 'images/logo.png' %}" alt="SeaView Tours & Travel" height="50">
+        </div>
+
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+
+      <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+          <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+    </div>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="contact-hero">
+    <div class="container">
+        <h1>Contact Us</h1>
+        <p>We're here to assist you anytime. Get in touch for professional travel assistance and support.</p>
+        <a href="https://wa.me/256701157839" target="_blank" class="btn" style="background:#25D366;color:#fff;">
+            <i class="fab fa-whatsapp"></i> WhatsApp Chat
+        </a>
+    </div>
+</section>
+
+<!-- ================= CONTACT SECTION ================= -->
+<section class="contact-section">
+<div class="container">
+<div class="contact-container">
+
+<!-- ===== CONTACT INFO ===== -->
+<div class="contact-info">
+    <h2>Get in Touch</h2>
+
+    <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-phone"></i></div>
+        <div class="contact-details">
+            <h4>Phone</h4>
+            <p>
+                <a href="tel:+256701157839">+256 701 157 839</a><br>
+                <a href="tel:+256777726356">+256 777 726 356</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-envelope"></i></div>
+        <div class="contact-details">
+            <h4>Email</h4>
+            <p>
+                <a href="mailto:seaviewreservations2@gmail.com">
+                    seaviewreservations2@gmail.com
+                </a>
+            </p>
+        </div>
+    </div>
+
+    <div class="contact-item">
+        <div class="contact-icon"><i class="fas fa-map-marker-alt"></i></div>
+        <div class="contact-details">
+            <h4>Office</h4>
+            <p>Zainabu Aziza Building, Entebbe Road<br>Level 7, Room C1-6, Kampala</p>
+        </div>
+    </div>
+</div>
+
+<!-- ===== CONTACT FORM (DJANGO) ===== -->
+<div class="contact-form-container">
+    <h2>Send Us a Message</h2>
+
+    <form id="contactForm"
+          method="POST"
+          action="{% url 'contact' %}"
+          class="contact-form">
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label class="form-label">Full Name *</label>
+            <input type="text" name="name" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Email *</label>
+            <input type="email" name="email" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Phone *</label>
+            <input type="tel" name="phone" class="form-input" required>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Service Needed</label>
+            <select name="service" class="form-select">
+                <option value="">Select a service</option>
+                <option>Passport Processing</option>
+                <option>Visa Processing</option>
+                <option>Air Ticketing</option>
+                <option>Car Hire</option>
+                <option>Tours & Travel</option>
+                <option>Other</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-label">Message *</label>
+            <textarea name="message" class="form-textarea" required></textarea>
+        </div>
+
+        <div id="formStatus" class="form-status"></div>
+
+        <button type="submit" id="submitBtn" class="submit-btn">
+            <i class="fas fa-paper-plane"></i> Send Message
+        </button>
+    </form>
+</div>
+
+</div>
+</div>
+</section>
+
+<!-- ================= MAP ================= -->
+<section class="map-section">
+<div class="container">
+<iframe
+    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7534043148165!2d32.58722507497323!3d0.315140364067299!"
+    class="map-frame"
+    loading="lazy">
+</iframe>
+</div>
+</section>
+    <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                    </ul>
+                </div>
+
+<!-- ================= FOOTER ================= -->
+<footer class="footer">
+<div class="container">
+<p>&copy; 2025 SeaView Tours & Travel. All rights reserved.</p>
+</div>
+</footer>
+
+<!-- ================= SCRIPTS ================= -->
+<script src="{% static 'js/script.js' %}"></script>
+
+<script>
+function showFormStatus(message, type) {
+    const status = document.getElementById('formStatus');
+    status.textContent = message;
+    status.className = `form-status ${type}`;
+}
+
+document.getElementById('contactForm').addEventListener('submit', async function(e) {
+    e.preventDefault();
+
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+
+    try {
+        const response = await fetch(this.action, {
+            method: 'POST',
+            body: new FormData(this),
+            headers: {'X-Requested-With': 'XMLHttpRequest'}
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+            showFormStatus(data.message, 'success');
+            this.reset();
+        } else {
+            showFormStatus(data.message || 'Submission failed', 'error');
+        }
+    } catch {
+        showFormStatus('Server error. Try again.', 'error');
+    }
+
+    submitBtn.disabled = false;
+});
+</script>
+
+</body>
+</html>
+
+

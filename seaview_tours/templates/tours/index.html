@@ -1,0 +1,544 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Uganda's leading tour company offering safaris, visa processing, honeymoon packages and travel experiences across East Africa">
+    
+    <!-- Load static files -->
+    {% load static %}
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" crossorigin="anonymous">
+    
+    <!-- Your CSS -->
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+
+</head>
+<body>
+
+
+    <!-- Header -->
+    <header class="header">
+        <div class="nav-overlay" id="navOverlay"></div>
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="SeaView Tours & Travel" width="120" height="60">
+            </div>
+             <!-- Add this hamburger button -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+          <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+               <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Explore Africa and the world with SeaView Tours and Travel</h1>
+                <p class="hero-subtitle">Book safaris, visas, flights, car hire, and unforgettable travel experiences with Uganda's most trusted travel company</p>
+                <div class="hero-buttons">
+                    <a href="{% url 'booking' %}" class="btn btn-primary">Book a Tour</a>
+                    <a href="https://wa.me/256701157839" target="_blank" class="btn btn-whatsapp">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Chat
+                    </a>
+                    <a href="{% url 'tours' %}" class="btn btn-secondary">Explore Packages</a>
+                </div>
+            </div>
+        </div>
+    </section>
+<!-- Services Quick Overview -->
+<section class="services-overview">
+    <div class="container">
+        <h2 class="text-center">Our Professional Services</h2>
+        <p class="text-center" style="max-width: 600px; margin: 1rem auto 3rem; color: #666;">
+            Complete travel solutions from visa processing to unforgettable adventures
+        </p>
+        
+        <div class="services-grid">
+            <!-- Service 1: Passport Processing -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://geneva.mofa.go.ug/sites/default/files/inline-images/download%20%282%29.jpeg" alt="Passport Processing" width="400" height="200" loading="lazy">
+                </div>
+                <div class="service-content">
+                    <h3>Passport and Visa Processing</h3>
+                    <p>Fast and reliable passport application and renewal services</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#passport" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=passport" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 2: Air Ticketing -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTFsSdMe_52iiS__JUTy5TpRhrXgWt8yMAubkdAS2jZp_X88QxgLk0lWU2j689kbgnHH7g&usqp=CAU" loading="lazy" alt="Air Ticketing" >
+                </div>
+                <div class="service-content">
+                    <h3>Air Ticketing</h3>
+                    <p>Best deals on domestic and international flight bookings</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#air-ticketing" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=air-ticketing" class="btn btn-primary btn-service">Book Flight</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 3: Car Hire -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://nileexcursionsafaris.com/wp-content/uploads/2024/10/congo-car-Rental.jpg" loading="lazy" alt="Car Hire">
+                </div>
+                <div class="service-content">
+                    <h3>Car Hire</h3>
+                    <p>Reliable vehicle rental for business and leisure travel</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#car-hire" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=car-hire" class="btn btn-primary btn-service">Rent Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 4: Honeymoon Packages -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://th-thumbnailer.cdn-si-edu.com/JrHyXBFia908Fp4DBaUWKv7GuQU=/960x439/https://tf-cmsv2-journeys-media.s3.amazonaws.com/filer/41/2e/412e7c5b-5491-463d-afd3-e76c68365334/animal_leopards_safari_is000014763964.jpg" loading="lazy" alt="Honeymoon Packages">
+                </div>
+                <div class="service-content">
+                    <h3>Tours and Honeymoon Packages</h3>
+                    <p>Curated safari adventures and cultural experiences and romantic getaways</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#honeymoon" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=honeymoon" class="btn btn-primary btn-service">Book Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 5: Interpol Services -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://menarights.org/sites/default/files/2025-04/shutterstock_2420124235.jpg"  loading="lazy" alt="Interpol Services">
+                </div>
+                <div class="service-content">
+                    <h3>Interpol Services</h3>
+                    <p>Professional assistance with international police clearance</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#interpol" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=interpol" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Service 6: National IDs -->
+            <div class="service-card">
+                <div class="service-image">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSFOmB926bPYlT8XTuxuIBRwktIF8P4kVGM6M3R2QY169RI8Dhrzb6CXfn8_-Iu69Cd6dY&usqp=CAU" loading="lazy" alt="National IDs">
+                </div>
+                <div class="service-content">
+                    <h3>National IDs Processings</h3>
+                    <p>Application, renewal and replacement of national ID</p>
+                    <div class="service-actions">
+                        <a href="{% url 'services' %}#national-id" class="btn btn-outline btn-service">Learn More</a>
+                        <a href="{% url 'booking' %}?service=national-id" class="btn btn-primary btn-service">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+   
+
+    <!-- Featured Tour Packages -->
+    <section class="featured-tours">
+        <div class="container">
+            <h2 class="text-center">Featured Tour Packages</h2>
+            <p class="text-center" style="max-width: 600px; margin: 1rem auto 3rem; color: #666;">
+                Handpicked adventures for the ultimate Uganda experience
+            </p>
+            
+            <div class="tours-grid">
+                <!-- Tour 1 -->
+                <div class="tour-card">
+                    <img src="https://www.queenelizabethparkuganda.com/wp-content/uploads/2024/07/Location-of-Queen-Elizabeth-National-Park-750x450.jpg" loading="lazy" alt="Queen Elizabeth Safari" class="tour-image">
+                    <div class="tour-content">
+                        <h3>Queen Elizabeth Safari</h3>
+                        <p>3-day wildlife adventure in Uganda's most popular national park. Spot lions, elephants, and tree-climbing lions.</p>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar"></i> 3 Days</span>
+                            <span><i class="fas fa-users"></i> 2-6 People</span>
+                        </div>
+                        <div class="service-actions" style="margin-top: 1.5rem;">
+                            <a href="/tours/1/" class="btn btn-outline btn-service">View Details</a>
+                            <a href="{% url 'booking' %}?tour=1" class="btn btn-primary btn-service">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tour 2 -->
+                <div class="tour-card">
+                    <img src="https://www.pianupewildlifereserveuganda.com/wp-content/uploads/2021/05/murchison-falls.jpg" loading="lazy" alt="Murchison Falls Adventure" class="tour-image">
+                    <div class="tour-content">
+                        <h3>Murchison Falls Adventure</h3>
+                        <p>Experience the mighty Nile River and witness Africa's most powerful waterfall on this 4-day safari.</p>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar"></i> 4 Days</span>
+                            <span><i class="fas fa-users"></i> 2-8 People</span>
+                        </div>
+                        <div class="service-actions" style="margin-top: 1.5rem;">
+                            <a href="/tours/2/" class="btn btn-outline btn-service">View Details</a>
+                            <a href="{% url 'booking' %}?tour=2" class="btn btn-primary btn-service">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Tour 3 -->
+                <div class="tour-card">
+                    <img src="https://www.allugandasafaris.com/wp-content/uploads/2020/08/4-Days-Ssese-Island-Honeymoon-Safari.jpg"loading="lazy" alt="Sipi Falls Honeymoon" class="tour-image">
+                    <div class="tour-content">
+                        <h3>Sipi Falls Honeymoon</h3>
+                        <p>Romantic getaway to Uganda's most beautiful waterfall with luxury accommodation and private tours.</p>
+                        <div class="tour-meta">
+                            <span><i class="fas fa-calendar"></i> 5 Days</span>
+                            <span><i class="fas fa-users"></i> 2 People</span>
+                        </div>
+                        <div class="service-actions" style="margin-top: 1.5rem;">
+                            <a href="/tours/3/" class="btn btn-outline btn-service">View Details</a>
+                            <a href="{% url 'booking' %}?tour=3" class="btn btn-primary btn-service">Book Now</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Mini Section -->
+    <section class="about-mini">
+        <div class="container">
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>About SeaView Tours & Travel</h2>
+                    <p>SeaView Tours is a Uganda-based travel and tour company dedicated to providing unforgettable travel experiences across World . We specialize in curated tour packages, safari adventures, beach trips, and personalized itineraries.</p>
+                    
+                    <div class="mission-vision">
+                        <div class="mission-box">
+                            <h4><i class="fas fa-bullseye"></i> Our Mission</h4>
+                            <p>To make travel across  easy, safe, and memorable for all tourists through exceptional service and reliable travel solutions.</p>
+                        </div>
+                        <div class="vision-box">
+                            <h4><i class="fas fa-eye"></i> Our Vision</h4>
+                            <p>To become the leading travel company in the Uganda, known for quality, reliability, and unforgettable experiences.</p>
+                        </div>
+                    </div>
+                    
+                    <a href="{% url 'about' %}" class="btn btn-primary" style="margin-top: 2rem;">Read More About Us</a>
+                </div>
+                <div class="about-image">
+                    <img src="https://www.safariventures.com/wp-content/uploads/2019/08/DSC8658-2.jpg"  loading="lazy" alt="SeaView Team" style="width: 100%; border-radius: 10px;">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Travel With Us -->
+    <section class="why-choose-us">
+        <div class="container">
+            <h2 class="text-center">Why Travel With SeaView Tours?</h2>
+            <p class="text-center" style="max-width: 600px; margin: 1rem auto 0; color: #666;">
+                Trusted by thousands of travelers for these reasons
+            </p>
+            
+            <div class="features-grid">
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-award"></i></div>
+                    <h3>Licensed & Verified</h3>
+                    <p>Fully licensed travel agency with all required certifications and registrations.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-bolt"></i></div>
+                    <h3>Fast Processing</h3>
+                    <p>Quick and secure visa, passport, and booking processing with high success rates.</p>
+                </div>
+                
+                <div class="feature-item">
+                    <div class="feature-icon"><i class="fas fa-tags"></i></div>
+                    <h3>Affordable Packages</h3>
+                    <p>Competitive pricing without compromising on quality and service standards.</p>
+                </div>
+                
+                
+            </div>
+        </div>
+    </section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+    <div class="container">
+        <h2 class="text-center">What Our Clients Say</h2>
+        <p class="text-center" style="max-width: 600px; margin: 1rem auto 3rem; color: #666;">
+            Real reviews from travelers who experienced Uganda with us
+        </p>
+        
+        <div class="testimonials-grid">
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="client-avatar">
+                        <img src="https://st2.depositphotos.com/1715570/6561/i/450/depositphotos_65613189-stock-photo-happy-business-woman-smiling-outside.jpg" loading="lazy"
+                         alt="Sarah Johnson">
+                    </div>
+                    <div class="client-info">
+                        <h4>Sarah Mulindwa</h4>
+                        <p>From Uganda</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"SeaView Tours made our Uganda safari absolutely incredible! From visa processing to the actual safari, everything was perfectly organized. Our guide was knowledgeable and the accommodations were excellent."</p>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="client-avatar">
+                        <img src="https://media.istockphoto.com/id/1437047112/photo/volunteer-friends-gardening-at-sunset-taking-a-selfie.jpg?s=612x612&w=0&k=20&c=0Qp1W9TjUH_iVgGJOoyELBDIzmrwtIbe22x8xdBwV9M="  loading="lazy"alt="David Chen">
+                    </div>
+                    <div class="client-info">
+                        <h4>David Chen</h4>
+                        <p>From Uk</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"The passport renewal service was super fast and efficient. I got my new passport in just 5 working days. Their WhatsApp support was very responsive throughout the process."</p>
+            </div>
+            
+            <div class="testimonial-card">
+                <div class="testimonial-header">
+                    <div class="client-avatar">
+                        <img src="https://client-gateway.rometic.com/contents/trulyafrican/68ce0f7f924f11001b533fd9/9PHAOewym5zTT3BBJ-500x500.jpg"  loading="lazy"alt="Johnathan Kiplit">
+                    </div>
+                    <div class="client-info">
+                        <h4>Johanthan Kiplit</h4>
+                        <p>From Kenya</p>
+                        <div class="rating">
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star"></i>
+                            <i class="fas fa-star-half-alt"></i>
+                        </div>
+                    </div>
+                </div>
+                <p>"Our honeymoon at Sipi Falls arranged by SeaView was magical! Every detail was taken care of. The private waterfall tours and romantic dinners were unforgettable. Highly recommend!"</p>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Travel Gallery -->
+   <!-- Travel Gallery -->
+<section class="travel-gallery">
+    <div class="container">
+        <div class="text-center">
+            <h2>Uganda's Beautiful Destinations</h2>
+            <p style="max-width: 700px; margin: 1rem auto 3rem; color: #666; font-size: 1.1rem;">
+                Discover why Uganda is called the Pearl of Africa
+            </p>
+        </div>
+        
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="https://wildfrontiersuganda.com/wp-content/uploads/2021/10/Brown-Boat-1.jpg" loading="lazy" alt="Wildlife Safari">
+                <div class="gallery-overlay">
+                    <div class="gallery-caption">
+                        <h3>Wildlife Safari</h3>
+                        <p>Lake Victoria</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://media.istockphoto.com/id/518959928/photo/mountain-gorilla.jpg?s=612x612&w=0&k=20&c=ccPitOZXoWS-BrjTee5z7Z1somIaO1wYkvF3kZCjQXc=" loading="lazy" alt="Mountain Gorillas">
+                <div class="gallery-overlay">
+                    <div class="gallery-caption">
+                        <h3>Mountain Gorillas</h3>
+                        <p>Bwindi Impenetrable Forest</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://dynamic-media-cdn.tripadvisor.com/media/photo-o/12/8d/ca/50/mt-elgon-3-days-2-nights.jpg?w=1200&h=1200&s=1" loading="lazy" alt="Sipi Falls">
+                <div class="gallery-overlay">
+                    <div class="gallery-caption">
+                        <h3>Sipi Falls</h3>
+                        <p>Mount Elgon Region</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="gallery-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT27YPHfLOvTR-u6GZl7gNhYpuXA0cenGiAQQ&s" loading="lazy" alt="Lake Bunyonyi">
+                <div class="gallery-overlay">
+                    <div class="gallery-caption">
+                        <h3>Lake Bunyonyi</h3>
+                        <p>Southwestern Uganda</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="text-center" style="margin-top: 3rem;">
+            <a href="https://wa.me/256701157839" class="btn btn-primary">Chat About Destinations</a>
+        </div>
+    </div>
+</section>
+    <!-- Blog Preview -->
+    <section class="blog-preview">
+        <div class="container">
+            <h2 class="text-center">Travel Tips</h2>
+            <p class="text-center" style="max-width: 600px; margin: 1rem auto 3rem; color: #666;">
+                Stay informed with our travel advice and destination guides
+            </p>
+            
+            <div class="blog-grid">
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1548013146-72479768bada?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Visa Tips" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Uganda Visa Requirements 2024</h3>
+                        <p>Complete guide to Uganda visa application process, requirements, and processing times for different nationalities.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-folder"></i> Visa Updates</span>
+                        </div>
+                        <a href="{% url 'traveltips' %}" class="btn btn-outline" style="margin-top: 1rem;">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=600&q=80" alt="Safari Tips" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Best Time for Uganda Safari</h3>
+                        <p>Learn about Uganda's seasons and the optimal times to visit different national parks for wildlife viewing.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-folder"></i> Travel Tips</span>
+                        </div>
+                        <a href="{% url 'traveltips' %}" class="btn btn-outline" style="margin-top: 1rem;">Read More</a>
+                    </div>
+                </div>
+                
+                <div class="blog-card">
+                    <img src="https://i.natgeofe.com/n/40182f4a-7e47-4767-9966-6c81c2761694/gorilla-trekking-uganda-family-gorillas.jpg" alt="Gorilla Trekking" class="blog-image">
+                    <div class="blog-content">
+                        <h3>Gorilla Trekking Guide 2024</h3>
+                        <p>Everything you need to know about gorilla trekking permits, preparation, and what to expect in Bwindi Forest.</p>
+                        <div class="blog-meta">
+                            <span><i class="far fa-calendar"></i> March 5, 2024</span>
+                            <span><i class="far fa-folder"></i> Destinations</span>
+                        </div>
+                        <a href="{% url 'traveltips' %}" class="btn btn-outline" style="margin-top: 1rem;">Read More</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="{% url 'traveltips' %}" class="btn btn-primary">View All Travel Tips</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/256701157839" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="{% static 'images/logo.png' %}" alt="SeaView Tours" height="60" style="filter: brightness(0) invert(1);">
+                    <p style="margin-top: 1rem; opacity: 0.9;">Making travel across Uganda easy, safe, and memorable for all tourists.</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                        
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="{% url 'services' %}#visa">Visa Processing</a></li>
+                        <li><a href="{% url 'services' %}#passport">Passport Processing</a></li>
+                        <li><a href="{% url 'services' %}#air-ticketing">Air Ticketing</a></li>
+                        <li><a href="{% url 'services' %}#car-hire">Car Hire</a></li>
+                        <li><a href="{% url 'services' %}#honeymoon">Tours and Travel</a></li>
+                         <li><a href="{% url 'services' %}#honeymoon">Interpol Services</a></li>
+                         <li><a href="{% url 'services' %}#honeymoon">National ID Services</a></li>
+                    </ul>
+                </div>
+                
+           <div class="footer-section">
+    <h4>Contact Info</h4>
+    <p><i class="fas fa-map-marker-alt"></i> {{ company_address }}</p>
+    <p><i class="fas fa-phone"></i> {{ company_phone }}</p>
+    <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+    <p><i class="fas fa-envelope"></i> {{ company_email }}</p>
+</div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+            </div>
+        </div>
+    </footer>
+    <script src="js/script.js"></script>
+</body>
+</html>
+
+

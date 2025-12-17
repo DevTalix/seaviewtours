@@ -1,0 +1,702 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Learn about SeaView Tours & Travel - Uganda's trusted travel company offering professional visa, passport, safari and travel services.">
+    
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome for icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <style>
+        /* About Page Specific Styles */
+        .about-hero {
+            position: relative;
+            color: white;
+            padding: 200px 0 120px;
+            text-align: center;
+            margin-top: 0;
+            min-height: 70vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+
+        .about-hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(
+                    to bottom,
+                    rgba(0, 0, 0, 0.7) 0%,
+                    rgba(0, 0, 0, 0.5) 50%,
+                    rgba(0, 0, 0, 0.7) 100%
+                ),
+                url('https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -1;
+            filter: brightness(1.1) contrast(1.1);
+        }
+
+        .about-hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+
+        .about-hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+        }
+
+        .about-hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            opacity: 0.95;
+            font-weight: 400;
+            line-height: 1.6;
+        }
+
+        /* About Content Sections */
+        .about-section {
+            padding: 80px 0;
+        }
+
+        .about-section:nth-child(even) {
+            background: var(--light-gray);
+        }
+
+        .about-section:nth-child(odd) {
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: var(--secondary-blue);
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        /* Story Section */
+        .story-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .story-image {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .story-image img {
+            width: 100%;
+            height: 400px;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+
+        .story-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Mission & Vision */
+        .mission-vision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .mission-card, .vision-card {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            text-align: center;
+            transition: transform 0.3s;
+            border: 1px solid #f0f0f0;
+        }
+
+        .mission-card:hover, .vision-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+
+        .mission-icon, .vision-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .mission-icon {
+            color: var(--primary-orange);
+        }
+
+        .vision-icon {
+            color: var(--primary-blue);
+        }
+
+        /* What We Offer */
+        .offerings-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .offering-item {
+            text-align: center;
+            padding: 2rem 1.5rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: all 0.3s;
+        }
+
+        .offering-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+            border-color: var(--primary-orange);
+        }
+
+        .offering-icon {
+            font-size: 2.5rem;
+            color: var(--primary-blue);
+            margin-bottom: 1rem;
+        }
+
+        /* Team Section */
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .team-member {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+
+        .team-member:hover {
+            transform: translateY(-5px);
+        }
+
+        .member-photo {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            margin: 0 auto 1.5rem;
+            overflow: hidden;
+            border: 3px solid var(--primary-orange);
+        }
+
+        .member-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Values Section */
+        .values-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .value-item {
+            text-align: center;
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+        }
+
+        .value-icon {
+            font-size: 2.5rem;
+            color: var(--primary-orange);
+            margin-bottom: 1rem;
+        }
+
+        /* Call to Action */
+        .about-cta {
+            background: var(--secondary-blue);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .about-cta h2 {
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .about-cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .about-hero {
+                padding: 150px 0 80px;
+                min-height: 60vh;
+            }
+            
+            .about-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .about-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .mission-vision-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .cta-buttons .btn {
+                width: 100%;
+                max-width: 250px;
+                margin-bottom: 0.5rem;
+            }
+            
+            .about-section {
+                padding: 60px 0;
+            }
+        }
+        /* Talk to Agent Button */
+.btn-talk-agent {
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(79, 195, 247, 0.3);
+}
+
+.btn-talk-agent:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(79, 195, 247, 0.4);
+    color: white;
+}
+
+.btn-talk-agent i {
+    font-size: 1.1rem;
+}
+
+/* WhatsApp Button */
+.btn-whatsapp {
+    background: #25D366;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 1rem;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.btn-whatsapp:hover {
+    background: #128C7E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    color: white;
+}
+
+/* For the services page CTA specifically */
+.services-cta .btn-whatsapp {
+    background: #25D366;
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.services-cta .btn-primary {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+}
+
+.services-cta .btn-outline {
+    padding: 15px 30px;
+    font-size: 1.1rem;
+    border: 2px solid white;
+    background: transparent;
+    color: white;
+}
+
+.services-cta .btn-outline:hover {
+    background: white;
+    color: var(--secondary-blue);
+}
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+          <div class="nav-overlay" id="navOverlay"></div>
+        <div class="container">
+            <div class="logo">
+                <img src="{% static 'images/logo.png' %}" alt="SeaView Tours & Travel" height="60">
+            </div>
+              <!-- Add this hamburger button -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+          <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+           <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+        
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="about-hero">
+        <div class="container">
+            <div class="about-hero-content">
+                <h1>About SeaView Tours & Travel</h1>
+                <p>Your trusted partner for unforgettable travel experiences across Uganda and beyond</p>
+                <div class="hero-buttons">
+                    <a href="{% url 'services' %}" class="btn btn-primary">Explore Services</a>
+                    <a href="{% url 'contact' %}" class="btn btn-secondary">Contact Us</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Company Overview -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Who We Are</h2>
+            </div>
+            <div class="story-content">
+                <div class="story-text">
+                    <p>SeaView Tours & Travel is a Uganda-based travel company dedicated to providing exceptional travel solutions for both local and international travelers. Founded with a passion for exploration and customer satisfaction, we have grown to become one of Uganda's most trusted travel agencies.</p>
+                    
+                    <p>We specialize in making travel accessible, safe, and memorable for everyone. Whether you're planning a wildlife safari, need visa processing assistance, or looking for the best flight deals, our team of experienced professionals is here to guide you every step of the way.</p>
+                    
+                    <p>Our commitment to excellence and customer-centric approach has earned us the trust of thousands of travelers who have experienced Uganda's beauty through our carefully curated tours and services.</p>
+                </div>
+                <div class="story-image">
+                    <img src="https://images.unsplash.com/photo-1520250497591-112f2f40a3f4?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80" alt="SeaView Team">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Mission & Vision -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Mission & Vision</h2>
+            </div>
+            <div class="mission-vision-grid">
+                <div class="mission-card">
+                    <div class="mission-icon"><i class="fas fa-bullseye"></i></div>
+                    <h3>Our Mission</h3>
+                    <p>To make travel across Uganda easy, safe, and memorable for all tourists through exceptional service, reliable travel solutions, and personalized attention to every client's needs.</p>
+                </div>
+                
+                <div class="vision-card">
+                    <div class="vision-icon"><i class="fas fa-eye"></i></div>
+                    <h3>Our Vision</h3>
+                    <p>To become the leading travel company in East Africa, recognized for quality, reliability, and unforgettable travel experiences that showcase the beauty of Uganda to the world.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Our Story -->
+    <section class="about-section">
+        <div class="container">
+            <div class="section-title">
+                <h2>Our Story</h2>
+            </div>
+            <div class="story-content">
+                <div class="story-image">
+                    <img src="https://www.safariventures.com/wp-content/uploads/2019/08/DSC8658-2.jpg" alt="SeaView Team Working">
+                </div>
+                <div class="story-text">
+                   <p>SeaView Tours & Travel is a premier travel agency based in Uganda, founded by industry expert Miiro.</p>
+
+                   <p>With years of experience in travel and tourism, we've grown from a small local agency to a comprehensive travel solutions provider serving clients across Uganda and internationally.</p>
+
+                   <p>Our team combines local expertise with global travel knowledge to deliver exceptional service for every journey.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- What We Offer -->
+    <section class="about-section" id="services">
+        <div class="container">
+            <div class="section-title">
+                <h2>What We Offer</h2>
+            </div>
+            <div class="offerings-grid">
+                <div class="offering-item">
+                    <div class="offering-icon"><i class="fas fa-passport"></i></div>
+                    <h3>Passport & Visa Services</h3>
+                    <p>Professional assistance with passport applications, renewals, and visa processing for all destinations.</p>
+                </div>
+                
+                <div class="offering-item">
+                    <div class="offering-icon"><i class="fas fa-plane"></i></div>
+                    <h3>Air Ticketing</h3>
+                    <p>Best deals on domestic and international flights with flexible booking options.</p>
+                </div>
+                
+                <div class="offering-item">
+                    <div class="offering-icon"><i class="fas fa-car"></i></div>
+                    <h3>Car Hire</h3>
+                    <p>Reliable vehicle rental services for business and leisure travel across Uganda.</p>
+                </div>
+                
+                <div class="offering-item">
+                    <div class="offering-icon"><i class="fas fa-hiking"></i></div>
+                    <h3>Tour Packages</h3>
+                    <p>Curated safari adventures, cultural experiences, and honeymoon packages.</p>
+                </div>
+            </div>
+            
+            <div class="text-center" style="margin-top: 3rem;">
+                <a href="{% url 'services' %}" class="btn btn-primary">View All Services</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="why-choose-us">
+    <div class="container">
+        <div class="section-header">
+            <h2>Why Choose SeaView Tours?</h2>
+            <p class="section-subtitle">Experience the difference with Uganda's most trusted travel partner</p>
+        </div>
+        
+        <div class="features-grid">
+            <!-- Feature 1 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-award"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Licensed & Verified</h3>
+                    <p>Fully licensed travel agency with all required certifications and registrations.</p>
+                </div>
+                <div class="feature-number" data-number="1">01</div>
+            </div>
+            
+            <!-- Feature 2 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-bolt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Fast Processing</h3>
+                    <p>Quick and secure visa, passport, and booking processing with high success rates.</p>
+                </div>
+                <div class="feature-number" data-number="2">02</div>
+            </div>
+            
+            <!-- Feature 3 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-tags"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Affordable Packages</h3>
+                    <p>Competitive pricing without compromising on quality and service standards.</p>
+                </div>
+                <div class="feature-number" data-number="3">03</div>
+            </div>
+            
+            <!-- Feature 4 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-headset"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>24/7 Support</h3>
+                    <p>Round-the-clock customer support via phone, WhatsApp, and email.</p>
+                </div>
+                <div class="feature-number" data-number="4">04</div>
+            </div>
+            
+            <!-- Feature 5 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-user-tie"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Experienced Agents</h3>
+                    <p>Professional travel consultants with extensive industry experience.</p>
+                </div>
+                <div class="feature-number" data-number="5">05</div>
+            </div>
+            
+            <!-- Feature 6 -->
+            <div class="feature-card">
+                <div class="feature-icon-wrapper">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <div class="feature-content">
+                    <h3>Secure & Reliable</h3>
+                    <p>Your safety and satisfaction are our top priorities.</p>
+                </div>
+                <div class="feature-number" data-number="6">06</div>
+            </div>
+        </div>
+    </div>
+</section>
+    <!-- Call to Action -->
+    <section class="about-cta">\
+
+        <div class="container">
+            <h2>Ready to Start Your Journey?</h2>
+            <p>Contact us today to plan your perfect Uganda adventure with expert guidance and personalized service.</p>
+            <div class="cta-buttons">
+                <a href="{% url 'booking' %}" class="btn btn-primary">Book a Tour</a>
+                <a href="https://wa.me/256701157839"target="_blank" class="btn btn-whatsapp">
+                    <i class="btn-talk-agent"></i> Talk to an Agent
+                </a>
+                <a href="{% url 'contact' %}" class="btn btn-secondary">Contact Us</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Floating WhatsApp Button -->
+    <a href="https://wa.me/256701157839" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="{% static 'images/logo.png' %}" alt="SeaView Tours" height="60" style="filter: brightness(0) invert(1);">
+                    <p style="margin-top: 1rem; opacity: 0.9;">Making travel across Uganda easy, safe, and memorable for all tourists.</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="{% url 'services' %}#visa">Visa Processing</a></li>
+                        <li><a href="{% url 'services' %}#passport">Passport Processing</a></li>
+                        <li><a href="{% url 'services' %}#air-ticketing">Air Ticketing</a></li>
+                        <li><a href="{% url 'services' %}#car-hire">Car Hire</a></li>
+                        <li><a href="{% url 'services' %}#honeymoon">Tours and Travel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Zainabu, Aziza Building, Entebbe Road, Level 7:RmC1-6</p>
+                    <p><i class="fas fa-phone"></i> +256 701 157 839 / 0777726356</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+                    <p><i class="fas fa-envelope"></i> 
+                   <a href="mailto:seaviewreservations2@gmail.com">seaviewreservations2@gmail.com</a>
+                </p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    
+</body>
+</html>
+
+

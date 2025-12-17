@@ -1,0 +1,592 @@
+﻿{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ page_title|default:"SeaView Tours & Travel" }}</title>
+    <meta name="description" content="Book your travel services securely with SeaView Tours. Tour packages, visa processing, passport services, air tickets, and more.">
+    
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous">
+    
+    
+    <link rel="stylesheet" href="css/styles.css">
+    <style>
+        /* ========== BOOKING PAGE STYLES ========== */
+        
+        /* Hero Banner */
+        .booking-hero {
+            background: linear-gradient(rgba(46, 58, 89, 0.85), rgba(46, 58, 89, 0.85)),
+                        url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?ixlib=rb-4.0.3&auto=format&fit=crop&w=1600&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 160px 0 100px;
+            text-align: center;
+            margin-top: 0;
+            min-height: 60vh;
+            display: flex;
+            align-items: center;
+        }
+
+        .booking-hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+        }
+
+        .booking-hero p {
+            font-size: 1.2rem;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        /* Booking Container */
+        .booking-container {
+            padding: 80px 0;
+            background: #f8fafc;
+        }
+
+        .booking-wrapper {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        @media (min-width: 992px) {
+            .booking-wrapper {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        /* Service Selection */
+        .service-selection {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+
+        .section-title {
+            color: var(--secondary-blue);
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--primary-orange);
+            border-radius: 2px;
+        }
+
+        /* Booking Form */
+        .booking-form-container {
+            background: white;
+            padding: 2.5rem;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+            position: sticky;
+            top: 100px;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: var(--secondary-blue);
+            font-weight: 600;
+            font-size: 0.95rem;
+        }
+
+        .form-label .required {
+            color: #e53e3e;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            font-family: 'Open Sans', sans-serif;
+            font-size: 1rem;
+            transition: all 0.3s;
+            background: white;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary-orange);
+            box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+        }
+
+        .form-textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            background: var(--primary-orange);
+            color: white;
+            border: none;
+            padding: 16px 30px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 1.5rem;
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: #e55a2b;
+            transform: translateY(-2px);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        /* Form Status */
+        .form-status {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            text-align: center;
+            font-weight: 600;
+            display: none;
+        }
+
+        .form-status.success {
+            background: #c6f6d5;
+            color: #22543d;
+            display: block;
+        }
+
+        .form-status.error {
+            background: #fed7d7;
+            color: #742a2a;
+            display: block;
+        }
+
+        /* Security Notice */
+        .security-notice {
+            background: #e8f4fd;
+            padding: 1rem;
+            border-radius: 8px;
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+            color: #2c5282;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .security-notice i {
+            color: #2c5282;
+            flex-shrink: 0;
+        }
+
+        /* Booking Steps */
+        .booking-steps {
+            background: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 10px;
+            margin-top: 2rem;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 12px;
+            padding-bottom: 12px;
+            border-bottom: 1px dashed #ddd;
+        }
+
+        .step:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+        }
+
+        .step-number {
+            width: 30px;
+            height: 30px;
+            background: var(--primary-orange);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9rem;
+        }
+
+        /* Floating WhatsApp */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 60px;
+            height: 60px;
+            background: #25D366;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            text-decoration: none;
+            transition: all 0.3s;
+        }
+
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            background: #128C7E;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1200px) {
+            .booking-wrapper {
+                padding: 0 20px;
+            }
+        }
+
+        @media (max-width: 992px) {
+            .booking-hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .booking-form-container {
+                position: static;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .booking-hero {
+                padding: 140px 0 80px;
+                min-height: 50vh;
+            }
+            
+            .booking-hero h1 {
+                font-size: 2rem;
+            }
+            
+            .booking-hero p {
+                font-size: 1.1rem;
+            }
+            
+            .booking-container {
+                padding: 60px 0;
+            }
+            
+            .service-selection, .booking-form-container {
+                padding: 2rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .booking-hero h1 {
+                font-size: 1.8rem;
+            }
+            
+            .service-selection, .booking-form-container {
+                padding: 1.5rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+          <div class="nav-overlay" id="navOverlay"></div>
+        <div class="container">
+            <div class="logo">
+                <img src="images/logo.png" alt="SeaView Tours & Travel" height="50">
+            </div>
+               <!-- Add this hamburger button -->
+        <button class="hamburger" id="hamburger">
+            <i class="fas fa-bars"></i>
+        </button>
+           <nav class="nav">
+    <ul>
+        <li><a href="{% url 'home' %}">Home</a></li>
+        <li><a href="{% url 'about' %}">About Us</a></li>
+        <li><a href="{% url 'services' %}">Our Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+        <li><a href="{% url 'booking' %}">Booking</a></li>
+        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li> 
+    </ul>
+</nav>
+              <div class="header-cta">
+    <!-- FIX THIS LINE TOO: -->
+    <a href="{% url 'booking' %}" class="btn btn-primary">Book Now</a>
+</div>
+        </div>
+    </header>
+
+    <!-- Hero Banner -->
+    <section class="booking-hero">
+        <div class="container">
+            <h1>Book With Us</h1>
+            <p>Fill the simple form below. Your booking is sent instantly to our WhatsApp agent, and we'll contact you within 1 hour.</p>
+            <div class="hero-buttons">
+                <a href="#booking-form" class="btn btn-primary">Book Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Container -->
+    <section class="booking-container">
+        <div class="booking-wrapper">
+            <!-- Service Information -->
+           
+            </div>
+
+            <!-- Booking Form -->
+            <div class="booking-form-container" id="booking-form">
+                <h2 class="section-title"> Booking Form</h2>
+                <p style="color: #666; margin-bottom: 1.5rem;">Fill this simple form. Everything happens automatically.</p>
+                
+              <form id="simpleBookingForm" class="booking-form" novalidate>
+                    <div class="form-group">
+                        <label for="serviceType" class="form-label">What service do you need? <span class="required">*</span></label>
+                        <select id="serviceType" name="serviceType" class="form-select" required>
+                            <option value="">Select a service</option>
+                            <option value="Tour Package">Tour Package</option>
+                            <option value="Visa Processing">Visa Processing</option>
+                            <option value="Passport Processing">Passport Processing</option>
+                            <option value="Air Ticket">Air Ticket</option>
+                            <option value="Car Hire">Car Hire</option>
+                            <option value="Honeymoon Package">Honeymoon Package</option>
+                            <option value="National ID Services">National ID Services</option>
+                            <option value="Interpol Services">Interpol Services</option>
+                        </select>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="fullName" class="form-label">Your Full Name <span class="required">*</span></label>
+                        <input type="text" id="fullName" name="fullName" class="form-input" required 
+                               placeholder="John Smith" autocomplete="name">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone" class="form-label">WhatsApp/Phone Number <span class="required">*</span></label>
+                        <input type="tel" id="phone" name="phone" class="form-input" required 
+                               placeholder="+256 701 123 456 or 0701 123 456" autocomplete="tel">
+                        <small style="display: block; margin-top: 5px; color: #666;">We'll contact you on this number</small>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="bookingDetails" class="form-label">What do you need? (Optional)</label>
+                        <textarea id="bookingDetails" name="bookingDetails" class="form-textarea" 
+                                  placeholder="Example: Need Uganda visa for 2 people, traveling next month"></textarea>
+                    </div>
+
+                    <!-- Security Notice -->
+                    <div class="security-notice">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Your information is safe. We only use it for your booking.</span>
+                    </div>
+                    <div class="form-group">
+</div>
+                    
+                    <div id="formStatus" class="form-status"></div>
+                    
+                   <button type="submit" class="submit-btn">
+                   <i class="fas fa-paper-plane"></i> Book Now
+                </button>
+
+
+                </form>
+            </div>
+        </div>
+    </section>
+    <script>
+document.getElementById('simpleBookingForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById('fullName').value.trim();
+    const phone = document.getElementById('phone').value.trim();
+    const service = document.getElementById('serviceType').value.trim();
+    const details = document.getElementById('bookingDetails').value.trim();
+    const statusBox = document.getElementById('formStatus');
+
+    // Reset status
+    statusBox.textContent = "";
+    statusBox.className = "form-status";
+
+    // Required field check
+    if (!name || !phone || !service) {
+        statusBox.textContent = "Please fill in all required fields.";
+        statusBox.classList.add("error");
+        return;
+    }
+
+    // Phone validation (at least 9 digits)
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 9) {
+        statusBox.textContent = "Please enter a valid phone number.";
+        statusBox.classList.add("error");
+        return;
+    }
+
+    // Build WhatsApp message
+    const whatsappNumber = "256701157839";
+    const message =
+        `Hello, I would like to book a service:\n` +
+        `Name: ${name}\n` +
+        `Phone: ${phone}\n` +
+        `Service: ${service}\n` +
+        `Details: ${details}`;
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    // Show success before redirect
+    statusBox.textContent = "Redirecting to WhatsApp...";
+    statusBox.classList.add("success");
+
+    window.open(url, "_blank");
+});
+</script>
+
+
+    <!-- Floating WhatsApp -->
+    <a href="https://wa.me/256701157839" target="_blank" class="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <img src="images/Logo.png" alt="SeaView Tours" height="50" style="filter: brightness(0) invert(1);">
+                    <p style="margin-top: 1rem; opacity: 0.9;">Making travel across Uganda easy, safe, and memorable for all tourists.</p>
+                    <div class="social-links" style="margin-top: 1.5rem;">
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-facebook"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-twitter"></i></a>
+                        <a href="#" style="color: white; margin-right: 1rem; font-size: 1.2rem;"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/256701157839" target="_blank" style="color: white; font-size: 1.2rem;"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'about' %}">About Us</a></li>
+                        <li><a href="{% url 'services' %}">Our Services</a></li>
+                        <li><a href="{% url 'contact' %}">Contact Us</a></li>
+                        <li><a href="{% url 'booking' %}">Booking </a></li>
+                        <li><a href="{% url 'traveltips' %}">Travel Tips</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Our Services</h4>
+                    <ul>
+                        <li><a href="{% url 'services' %}#passport">Passport Processing</a></li>
+                        <li><a href="{% url 'services' %}#visa">Visa Processing</a></li>
+                        <li><a href="{% url 'services' %}#air-ticketing">Air Ticketing</a></li>
+                        <li><a href="{% url 'services' %}#car-hire">Car Hire</a></li>
+                        <li><a href="{% url 'services' %}#tours">Tours & Travel</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Contact Info</h4>
+                    <p><i class="fas fa-map-marker-alt"></i> Zainabu, Aziza Building, Entebbe Road, Level 7:RmC1-6</p>
+                    <p><i class="fas fa-phone"></i> +256 701 157 839 / 0777726356</p>
+                    <p><i class="fas fa-clock"></i> Mon-Sun: 8:00 AM - 8:00 PM</p>
+                    <p><i class="fas fa-envelope"></i> 
+                   <a href="mailto:seaviewreservations2@gmail.com">seaviewreservations2@gmail.com</a>
+                </p>
+
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 SeaView Tours & Travel. All rights reserved. | Designed by TalContent Hub Ltd</p>
+            </div>
+        </div>
+              <script>
+document.getElementById("simpleBookingForm").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const name = document.getElementById("fullName").value.trim();
+    const phone = document.getElementById("phone").value.trim();
+    const service = document.getElementById("serviceType").value;
+    const details = document.getElementById("bookingDetails").value.trim();
+    const status = document.getElementById("formStatus");
+
+    status.textContent = "";
+    status.className = "form-status";
+
+    if (!name || !phone || !service) {
+        status.textContent = "Please fill in all required fields.";
+        status.classList.add("error");
+        return;
+    }
+
+    const digits = phone.replace(/\D/g, "");
+    if (digits.length < 9) {
+        status.textContent = "Invalid phone number. Please check it.";
+        status.classList.add("error");
+        return;
+    }
+
+    // ONLY happens after validation
+    const whatsappNumber = "256701157839";
+    const message =
+        `Booking Request:\n` +
+        `Name: ${name}\n` +
+        `Phone: ${phone}\n` +
+        `Service: ${service}\n` +
+        `Details: ${details}`;
+
+    const url = `https://wa.me/${whatsappNumber}?text=${encodeURIComponent(message)}`;
+
+    status.textContent = "Redirecting to WhatsApp...";
+    status.classList.add("success");
+
+    setTimeout(() => {
+        window.open(url, "_blank");
+    }, 500);
+});
+</script>
+
+
+        
+    </footer>
+     <script src="js/script.js"></script>
+
+</body>
+</html>

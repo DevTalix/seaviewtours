@@ -1,0 +1,26 @@
+# Create render.yaml in project root
+services:
+  - type: web
+    name: seaview-tours
+    env: python
+    buildCommand: "./build.sh"
+    startCommand: "gunicorn seaview_tours.wsgi:application"
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: seaview-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: WEB_CONCURRENCY
+        value: 4
+    healthCheckPath: /
+    domains:
+      - seaviewtours.com
+      - www.seaviewtours.com
+
+databases:
+  - name: seaview-db
+    plan: free
+    databaseName: seaviewtours
+    user: seaviewuser
